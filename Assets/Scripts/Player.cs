@@ -37,10 +37,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (playerMove > 0)
-            Debug.Log($"Up : {playerMove}");
-        else if(playerMove < 0)
-            Debug.Log($"Down : {playerMove}");
         transform.Translate(playerMove, 0, 0);
     }
 
