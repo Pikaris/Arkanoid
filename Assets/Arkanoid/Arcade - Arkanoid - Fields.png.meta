@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,7 +95,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 248
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b615b113533e643ba7bc949971c036
+      internalID: 62157706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_1
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 248
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b93c5ecac48a8f64a9c214f4a85dac3e
+      internalID: -595317245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_2
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 248
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec02282f61fd64a418219490a6d43671
+      internalID: 142354695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_3
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 248
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95d7da4e1b11d743bf7b9f172e09f3e
+      internalID: 624757416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_4
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 248
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55bdcd4eeadb664489bfe3fd7bceec02
+      internalID: -1515942568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 224
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f811496be3b4a124b85fc6ab7202b2a6
+      internalID: 1794086285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_6
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 0
+        width: 224
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faa0244db3d914845960e33f98e105d5
+      internalID: -682477824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_7
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 224
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b9f78a5277b2584a978e4bcf3c1673a
+      internalID: -1501441433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_8
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 0
+        width: 224
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c16112c43812c74699b0fd2230946a2
+      internalID: -307957326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_9
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 200
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0a6a2439bedca3408366908d1f7b301
+      internalID: 2097088909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Fields_10
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 192
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa3ff6b7490b64a41aba1368cc6a0088
+      internalID: 1628384479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +337,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Arcade - Arkanoid - Fields_0: 62157706
+      Arcade - Arkanoid - Fields_1: -595317245
+      Arcade - Arkanoid - Fields_10: 1628384479
+      Arcade - Arkanoid - Fields_2: 142354695
+      Arcade - Arkanoid - Fields_3: 624757416
+      Arcade - Arkanoid - Fields_4: -1515942568
+      Arcade - Arkanoid - Fields_5: 1794086285
+      Arcade - Arkanoid - Fields_6: -682477824
+      Arcade - Arkanoid - Fields_7: -1501441433
+      Arcade - Arkanoid - Fields_8: -307957326
+      Arcade - Arkanoid - Fields_9: 2097088909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

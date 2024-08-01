@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - LeftFarCollider
+  - LeftCollider
+  - LeftMiddleCollider
+  - RightFarCollider
+  - RightCollider
+  - RightMiddleCollider
+  - MiddleCollider
   layers:
   - Default
   - TransparentFX
@@ -11,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Border
+  - Player
+  - Ball
   - 
   - 
   - 
@@ -40,4 +47,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 78031109
+    locked: 0
+  - name: Border
+    uniqueID: 2175201667
+    locked: 0
+  - name: Ball
+    uniqueID: 716199259
     locked: 0
