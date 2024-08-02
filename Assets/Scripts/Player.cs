@@ -13,6 +13,11 @@ public class Player : MonoBehaviour
 
     PlayerInputAction InputAction;
 
+    Vector2 Coordinate
+    {
+        get => transform.position;
+        set => transform.position = value;
+    }    
     private void Start()
     {
     }

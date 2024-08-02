@@ -11,6 +11,7 @@ TagManager:
   - RightCollider
   - RightMiddleCollider
   - MiddleCollider
+  - Border
   layers:
   - Default
   - TransparentFX
