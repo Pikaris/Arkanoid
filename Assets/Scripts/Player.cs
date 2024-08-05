@@ -6,25 +6,25 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 0.5f;
+
     float playerMove;
+
+    public BoxCollider2D playerCollider;
+
+    Ball ball;
 
     Vector2 mousePosition;
     Vector3 inputDirection;
 
     PlayerInputAction InputAction;
 
-    Vector2 Coordinate
-    {
-        get => transform.position;
-        set => transform.position = value;
-    }    
-    private void Start()
-    {
-    }
+
     private void Awake()
     {
         InputAction = new PlayerInputAction();
+        playerCollider = GetComponent<BoxCollider2D>();
     }
+
 
     private void OnEnable()
     {
@@ -51,4 +51,28 @@ public class Player : MonoBehaviour
 
         playerMove = (scroll / 120.0f) * moveSpeed;
     }
+
+#if UNITY_EDITOR
+
+    protected virtual void DrawGizmos()
+    {
+        Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x) + (Vector3.up * playerCollider.size.y);
+        Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x) + (Vector3.up * -playerCollider.size.y);
+
+        Gizmos.DrawLine(p0, p1);
+    }
+    protected virtual void DrawGizmosPlayer()
+    {
+        Gizmos.color = Color.green;
+        Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
+        Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
+        Vector3 p2 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
+        Vector3 p3 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
+
+        Gizmos.DrawLine(p0, p1);
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p1, p3);
+        Gizmos.DrawLine(p0, p2);
+    }
+#endif
 }

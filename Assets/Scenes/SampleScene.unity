@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 220903726}
   - component: {fileID: 220903729}
   - component: {fileID: 220903730}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.2
+  playerCollider: {fileID: 0}
 --- !u!61 &220903730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -477,9 +478,9 @@ GameObject:
   - component: {fileID: 1056328181}
   - component: {fileID: 1056328180}
   - component: {fileID: 1056328184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,6 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpeed: 8
+  LeftFarAngle: 70
 --- !u!212 &1056328182
 SpriteRenderer:
   m_ObjectHideFlags: 0

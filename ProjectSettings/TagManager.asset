@@ -4,13 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LeftFarCollider
-  - LeftCollider
-  - LeftMiddleCollider
-  - RightFarCollider
-  - RightCollider
-  - RightMiddleCollider
-  - MiddleCollider
   - Border
   layers:
   - Default
