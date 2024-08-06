@@ -9,27 +9,67 @@ public class Ball : MonoBehaviour
 
     public float LeftFarAngle = 70.0f;
 
+    BoxCollider2D playerCollider;
+
     Vector3 direction;
 
-    Player player;
+    Vector3 playerPosition;
+
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        //player = GetComponent<player>();
         direction = Vector3.down;
     }
 
     private void Update()
     {
         transform.Translate(Time.deltaTime * ballSpeed * direction);
+        Debug.Log(transform.position.x);
+    }
+
+    public void GetPlayerData(BoxCollider2D collider, Vector3 position)
+    {
+        playerCollider = collider;
+        playerPosition = position;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (player.playerCollider.size.x * 0.3f > transform.position.x)
+        float playerSizeX = playerCollider.size.x;
+        float playerPosX = playerPosition.x;
+        Debug.Log(playerPosX - playerSizeX * 0.85f);
+        if (collision.gameObject.CompareTag("Player") && (transform.position.x < (playerPosX - playerSizeX * 0.85f)))
         {
+            Debug.Log("HitLeftFar");
             direction = Quaternion.Euler(0.0f, 0.0f, 70.0f) * Vector3.up;
         }
+        //else if (collision.gameObject.CompareTag("Player") && (transform.position.x < (playerPosX - playerSizeX * 0.7f)))
+        //{
+        //    Debug.Log("HitLeft");
+        //    direction = Quaternion.Euler(0.0f, 0.0f, 40.0f) * Vector3.up;
+        //}
+        //else if (collision.gameObject.CompareTag("Player") && (transform.position.x < (playerPosX - playerSizeX * 0.5f)))
+        //{
+        //    Debug.Log("HitLeftMiddle");
+        //    direction = Quaternion.Euler(0.0f, 0.0f, 0.0f) * Vector3.up;
+        //}
+        //else if (collision.gameObject.CompareTag("Player") && (transform.position.x > (playerPosX + playerSizeX * 0.2f)))
+        //{
+        //    Debug.Log("HitRightMiddle");
+        //    direction = Quaternion.Euler(0.0f, 0.0f, 0.0f) * Vector3.up;
+        //}
+        //else if (collision.gameObject.CompareTag("Player") && (transform.position.x > (playerPosX + playerSizeX * 0.35f)))
+        //{
+        //    Debug.Log("HitRight");
+        //    direction = Quaternion.Euler(0.0f, 0.0f, -40.0f) * Vector3.up;
+        //}
+        //else if (collision.gameObject.CompareTag("Player") && (transform.position.x > (playerPosX + playerSizeX * 0.5f)))
+        //{
+        //    Debug.Log("HitRightFar");
+        //    direction = Quaternion.Euler(0.0f, 0.0f, -70.0f) * Vector3.up;
+        //}
+
         if (collision.gameObject.CompareTag("Border"))
         {
             direction = Vector3.Reflect(direction, collision.contacts[0].normal);

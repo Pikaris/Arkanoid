@@ -9,20 +9,22 @@ public class Player : MonoBehaviour
 
     float playerMove;
 
-    public BoxCollider2D playerCollider;
-
-    Ball ball;
+    BoxCollider2D playerCollider;
 
     Vector2 mousePosition;
     Vector3 inputDirection;
 
     PlayerInputAction InputAction;
 
+    
 
     private void Awake()
     {
         InputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
+
+        Ball ball = FindFirstObjectByType<Ball>();
+        ball.GetPlayerData(playerCollider, transform.position);
     }
 
 
