@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     PlayerInputAction InputAction;
 
+    Ball ball;
+
     
 
     private void Awake()
@@ -23,8 +25,7 @@ public class Player : MonoBehaviour
         InputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
 
-        Ball ball = FindFirstObjectByType<Ball>();
-        ball.GetPlayerData(playerCollider, transform.position);
+        ball = FindFirstObjectByType<Ball>();
     }
 
 
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         transform.Translate(playerMove, 0, 0);
+        ball.GetPlayerData(playerCollider, transform.position);
     }
 
     void Scroll(InputAction.CallbackContext context)

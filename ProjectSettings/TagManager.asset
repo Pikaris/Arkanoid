@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Border
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Border
   - Player
   - Ball
-  - 
-  - 
+  - Block
+  - BackGround
   - 
   - 
   - 
@@ -42,6 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 2296126559
+    locked: 0
   - name: Player
     uniqueID: 78031109
     locked: 0
@@ -50,4 +54,7 @@ TagManager:
     locked: 0
   - name: Ball
     uniqueID: 716199259
+    locked: 0
+  - name: Block
+    uniqueID: 2923338789
     locked: 0
