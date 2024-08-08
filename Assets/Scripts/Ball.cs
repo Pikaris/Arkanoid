@@ -38,13 +38,15 @@ public class Ball : MonoBehaviour
     {
         float playerSizeX = playerCollider.size.x;
         float playerPosX = playerPosition.x;
-        Debug.Log(playerPosX + playerSizeX * 0.2f);
+
+        Debug.DrawRay(playerPosition, direction, new Color(1,0,0));
 
         if (collision.gameObject.CompareTag("Border"))
         {
-            direction = Vector3.Reflect(direction, collision.contacts[0].normal);
+            direction = Vector2.Reflect(direction, collision.contacts[0].normal);
         }
-        else if (collision.gameObject.CompareTag("Player") && (transform.position.x < (playerPosX - playerSizeX * 0.4f)))
+        
+        if (collision.gameObject.CompareTag("Player") && (transform.position.x < (playerPosX - playerSizeX * 0.4f)))
         {
             Debug.Log("HitLeftFar");
             direction = Quaternion.Euler(0.0f, 0.0f, 70.0f) * Vector3.up;
