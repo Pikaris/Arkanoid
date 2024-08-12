@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Ball : MonoBehaviour
 {
     public float ballSpeed = 1.0f;
-
-    public float LeftFarAngle = 70.0f;
 
     BoxCollider2D playerCollider;
 
@@ -17,12 +16,16 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rigidBody2D;
 
+    Block block;
+
 
     private void Awake()
     {
         //player = GetComponent<player>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        direction = Vector3.down;
+        block = GetComponent<Block>();
+
+        direction = Vector3.up;
     }
 
     private void FixedUpdate()
@@ -36,6 +39,7 @@ public class Ball : MonoBehaviour
     {
         playerCollider = collider;
         playerPosition = position;
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,11 +51,16 @@ public class Ball : MonoBehaviour
 
         Debug.DrawRay(playerPosition, direction, new Color(1,0,0));
 
-        if (collision.gameObject.CompareTag("Border") || collision.gameObject.CompareTag("Block"))
+        if (collision.gameObject.CompareTag("Border"))
         {
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Block") || block.blockFlag || !block.blockFlag)
+        {
+            direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (transform.position.x < (playerPosX - playerSizeX * 0.4f))
             {

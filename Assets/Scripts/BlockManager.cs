@@ -1,18 +1,27 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
-    public Transform[] blockTransform;
+    Block block;
 
     private void Awake()
     {
-        Transform blockRoot = transform.GetChild(0);
-        blockTransform = new Transform[blockRoot.childCount];
-        for (int i = 0; i < blockTransform.Length; i++)
+        int count = transform.childCount;
+        Debug.Log(count);
+        for (int i = 0; i < count; i += 2)
         {
-            blockTransform[i] = blockRoot.GetChild(i);
+            block.BlockFlag = true;
+
+            for (int j = 1; j < count; j += 2)
+            {
+                block.BlockFlag = false;
+            }
         }
+
+        Debug.Log(count);
+        //Debug.Log(obj);
     }
 }

@@ -5,25 +5,19 @@ using UnityEngine.UIElements;
 
 public class Block : BlockManager
 {
-    public GameObject Block_Orange;
-
-    public float blockInterval_X = 0.4f;
-    public float blockInterval_Y = 0.3f;
-
-
-    private void Start()
+    bool blockFlag;
+    public bool BlockFlag
     {
-        
-    }
-    private void Awake()
-    {
-        Block_Orange = GetComponent<GameObject>(); 
-        for (int i = 0; i < blockTransform.Length; i++)
+        get
         {
-            GameObject obj = Instantiate(blockTransform[i].gameObject, Vector3.right * (blockInterval_X * i), Quaternion.identity);
-            
+            return blockFlag;
+        }
+        set
+        {
+            blockFlag = value;
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

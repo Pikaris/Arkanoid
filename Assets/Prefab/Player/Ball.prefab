@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4792834510852970126}
   - component: {fileID: 1749990354510674895}
   - component: {fileID: 9126176411925947364}
-  - component: {fileID: 5173027705657814015}
+  - component: {fileID: 4269026617214595411}
   - component: {fileID: 1376341759161586701}
   m_Layer: 8
   m_Name: Ball
-  m_TagString: Player
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 716199259
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2011208066, guid: f688e2b89f8a993428e82c116adf92b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce0e735ea881f04a84c7cf328807f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 7
+  ballSpeed: 5
   LeftFarAngle: 70
---- !u!61 &5173027705657814015
+--- !u!61 &4269026617214595411
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.125, y: 0.1}
+  m_Size: {x: 0.16666667, y: 0.13333334}
   m_EdgeRadius: 0
 --- !u!50 &1376341759161586701
 Rigidbody2D:
@@ -172,4 +172,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
