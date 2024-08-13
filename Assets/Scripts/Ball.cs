@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -16,14 +17,12 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rigidBody2D;
 
-    Block block;
-
+    bool hit = true;
 
     private void Awake()
     {
         //player = GetComponent<player>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        block = GetComponent<Block>();
 
         direction = Vector3.up;
     }
@@ -47,17 +46,20 @@ public class Ball : MonoBehaviour
         float playerSizeX = playerCollider.size.x;
         float playerPosX = playerPosition.x;
 
-        Ray2D ray = new Ray2D(transform.position, direction);
-
-        Debug.DrawRay(playerPosition, direction, new Color(1,0,0));
-
         if (collision.gameObject.CompareTag("Border"))
         {
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
         }
-        if (collision.gameObject.CompareTag("Block") || block.blockFlag || !block.blockFlag)
+
+        if (collision.gameObject.CompareTag("Block") && hit)
         {
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+            hit = false;
+        }
+        else if(collision.gameObject.CompareTag("Block") && !hit)
+        {
+            direction = Vector2.Reflect(Vector2.up, collision.contacts[0].normal);
+            hit = true;
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -101,6 +103,4 @@ public class Ball : MonoBehaviour
 
         
     }
-
-
 }
