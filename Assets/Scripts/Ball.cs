@@ -17,6 +17,8 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rigidBody2D;
 
+    List<GameObject> collisionList = new List<GameObject>();
+
     bool hit = true;
 
     private void Awake()
@@ -45,25 +47,23 @@ public class Ball : MonoBehaviour
     {
         float playerSizeX = playerCollider.size.x;
         float playerPosX = playerPosition.x;
+        collisionList.Add(gameObject);
+
 
         if (collision.gameObject.CompareTag("Border"))
         {
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
         }
 
-        if (collision.gameObject.CompareTag("Block") && hit)
+        if (collision.gameObject.CompareTag("Block"))
         {
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
-            hit = false;
         }
-        else if(collision.gameObject.CompareTag("Block") && !hit)
-        {
-            direction = Vector2.Reflect(Vector2.up, collision.contacts[0].normal);
-            hit = true;
-        }
+
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            collisionList.Remove(collision.gameObject);
             if (transform.position.x < (playerPosX - playerSizeX * 0.4f))
             {
                 Debug.Log("HitLeftFar");
@@ -101,6 +101,19 @@ public class Ball : MonoBehaviour
             }
         }
 
-        
+        if (collisionList.Count > 1)
+        {
+            collisionList.Clear();
+            return;
+        }
+        collisionList.Clear();
+    }
+
+    IEnumerator HitInterval()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+        }
     }
 }
