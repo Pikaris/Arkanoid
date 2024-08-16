@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     BoxCollider2D playerCollider;
 
     Vector3 direction;
+    Vector3 tempDirection;
 
     Vector3 playerPosition;
 
@@ -27,6 +28,8 @@ public class Ball : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         direction = Vector3.up;
+
+        tempDirection = direction;
     }
 
     private void FixedUpdate()
@@ -47,7 +50,6 @@ public class Ball : MonoBehaviour
     {
         float playerSizeX = playerCollider.size.x;
         float playerPosX = playerPosition.x;
-        collisionList.Add(gameObject);
 
 
         if (collision.gameObject.CompareTag("Border"))
@@ -57,9 +59,24 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Block"))
         {
-            direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+            if (collisionList.Count < 1)
+            {
+                collisionList.Add(gameObject);
+                tempDirection = direction;
+                Debug.Log("1");
+            }
+
+            if (collisionList.Count == 1)
+            {
+                direction = Vector2.Reflect(tempDirection, collision.contacts[0].normal);
+                Debug.Log("2");
+                //collisionList.Clear();
+                return;
+            }
+            //direction = Vector2.Reflect(direction, collision.contacts[0].normal);
         }
 
+        //Debug.Log(collisionList.Count);
 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -99,21 +116,6 @@ public class Ball : MonoBehaviour
                 Debug.Log("HitRightFar");
                 direction = Quaternion.Euler(0.0f, 0.0f, -70.0f) * Vector3.up;
             }
-        }
-
-        if (collisionList.Count > 1)
-        {
-            collisionList.Clear();
-            return;
-        }
-        collisionList.Clear();
-    }
-
-    IEnumerator HitInterval()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(3);
         }
     }
 }
