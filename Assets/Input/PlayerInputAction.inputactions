@@ -6,24 +6,44 @@
             "id": "67c11fe5-503c-4fae-9602-f73e7135ff67",
             "actions": [
                 {
-                    "name": "Scroll",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "37c21645-2853-40eb-bf75-8250083d14b0",
-                    "expectedControlType": "Axis",
+                    "id": "75dac94a-02fc-4f87-9c47-57f80ea44059",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "e05447af-2217-4857-b901-74c4a4ebc271",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "fa12e25a-eebe-479b-bc90-4df7c2201e3d",
-                    "path": "<Mouse>/scroll/y",
+                    "id": "bff40002-dcf4-4cc6-8ded-b08ad862137e",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aebc9c1e-ab37-4434-ae7a-d5d26c23fb6f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

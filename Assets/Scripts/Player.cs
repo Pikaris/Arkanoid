@@ -1,60 +1,88 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 0.5f;
-
-    float playerMove;
-
     BoxCollider2D playerCollider;
+    Rigidbody2D rigid;
+
+    Transform tempPlayerTransform;
 
     Vector2 mousePosition;
     Vector3 inputDirection;
+    Vector3 direction;
+    Vector3 worldPosition;
 
     PlayerInputAction InputAction;
 
     Ball ball;
 
-    
+    public float moveSpeed = 0.5f;
+
+    float playerMove;
+
+    bool shoot = false;
 
     private void Awake()
     {
         InputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
+        tempPlayerTransform = GetComponent<Transform>();
+        rigid = GetComponent<Rigidbody2D>();
+
+        direction = Vector3.zero;
+        worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         ball = FindFirstObjectByType<Ball>();
+        ball.GetPlayerData(playerCollider, transform.position);
     }
 
 
     private void OnEnable()
     {
         InputAction.Player.Enable();
-        InputAction.Player.Scroll.performed += Scroll;
-        InputAction.Player.Scroll.canceled += Scroll;
+        InputAction.Player.Fire.performed += OnFire;
+        InputAction.Player.Fire.canceled += OnFire;
+        InputAction.Player.Move.performed += OnMousePosition;
     }
 
     private void OnDisable()
     {
-        InputAction.Player.Scroll.canceled -= Scroll;
-        InputAction.Player.Scroll.performed -= Scroll;
+        InputAction.Player.Move.performed -= OnMousePosition;
+        InputAction.Player.Fire.canceled -= OnFire;
+        InputAction.Player.Fire.performed -= OnFire;
         InputAction.Player.Disable();
+    }
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(worldPosition + Time.fixedDeltaTime * moveSpeed * direction);
     }
 
     private void Update()
     {
-        transform.Translate(playerMove, 0, 0);
+        worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         ball.GetPlayerData(playerCollider, transform.position);
     }
 
-    void Scroll(InputAction.CallbackContext context)
+    public void OnMousePosition(InputAction.CallbackContext context)
     {
-        float scroll = context.ReadValue<float>();
-
-        playerMove = (scroll / 120.0f) * moveSpeed;
+        mousePosition = context.ReadValue<Vector2>();
     }
+
+    void OnFire(InputAction.CallbackContext context)
+    {
+        shoot = true;
+        if(shoot)
+        {
+            ball.GetFireData(shoot);
+            shoot = false;
+        }
+    }
+
 
 #if UNITY_EDITOR
 
