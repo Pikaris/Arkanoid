@@ -10,14 +10,19 @@ public class Ball : MonoBehaviour
     public float ballSpeed = 3.0f;
 
     BoxCollider2D playerCollider;
+    Vector3 playerPosition;
 
     Vector3 direction;
 
-    Vector3 playerPosition;
+    Vector3 positionReset;
 
     Rigidbody2D rigidBody2D;
 
     List<GameObject> collisionList = new List<GameObject>();
+
+    Player player;
+
+
 
     float elapsedTime = 0.0f;
 
@@ -27,8 +32,10 @@ public class Ball : MonoBehaviour
 
     private void Awake()
     {
-        //player = GetComponent<player>();
+        player = new Player();
         rigidBody2D = GetComponent<Rigidbody2D>();
+
+        positionReset = transform.position;
 
         direction = Vector3.zero;
     }
@@ -44,10 +51,14 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x, 
+            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x,
                 playerPosition.y + playerCollider.size.y));
             elapsedTime += Time.fixedDeltaTime;
         }
+    }
+
+    private void Update()
+    {
     }
 
     public void GetPlayerData(BoxCollider2D collider, Vector3 position)
@@ -63,7 +74,7 @@ public class Ball : MonoBehaviour
 
     void OnShoot()
     {
-        if(playerShoot)
+        if(playerShoot && !moving)
         {
             direction = Quaternion.Euler(0.0f, 0.0f, 30.0f) * Vector3.up;
             moving = true;
@@ -71,10 +82,23 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void BallReset()
+    {
+        playerShoot = false;
+        moving = false;
+        transform.position = positionReset;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         float playerSizeX = playerCollider.size.x;
         float playerPosX = playerPosition.x;
+
+        if(collision.gameObject.CompareTag("KillZone"))
+        {
+            player.PlayerLife -= 1;
+            BallReset();
+        }
 
         if (collision.gameObject.CompareTag("Border"))
         {

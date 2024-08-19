@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     BoxCollider2D playerCollider;
     Rigidbody2D rigid;
 
-    Transform tempPlayerTransform;
-
     Vector2 mousePosition;
     Vector3 inputDirection;
     Vector3 direction;
@@ -25,13 +23,27 @@ public class Player : MonoBehaviour
 
     float playerMove;
 
+    public int life = 3;
+
+    public int PlayerLife
+    {
+        get
+        {
+            return life;
+        }
+        set
+        {
+            life = value;
+        }
+    }
+
+
     bool shoot = false;
 
     private void Awake()
     {
         InputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
-        tempPlayerTransform = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
 
         direction = Vector3.zero;
@@ -83,28 +95,37 @@ public class Player : MonoBehaviour
         }
     }
 
+    //public Vector3 GetPlayerPosition()
+    //{
+    //    return playerTransform.position;
+    //}
+    //public BoxCollider2D GetPlayerCollider()
+    //{
+    //    return playerCollider;
+    //}
+
 
 #if UNITY_EDITOR
 
-    protected virtual void DrawGizmos()
-    {
-        Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x) + (Vector3.up * playerCollider.size.y);
-        Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x) + (Vector3.up * -playerCollider.size.y);
+    //protected virtual void DrawGizmos()
+    //{
+    //    Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x) + (Vector3.up * playerCollider.size.y);
+    //    Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x) + (Vector3.up * -playerCollider.size.y);
 
-        Gizmos.DrawLine(p0, p1);
-    }
-    protected virtual void DrawGizmosPlayer()
-    {
-        Gizmos.color = Color.green;
-        Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
-        Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
-        Vector3 p2 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
-        Vector3 p3 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
+    //    Gizmos.DrawLine(p0, p1);
+    //}
+    //protected virtual void DrawGizmosPlayer()
+    //{
+    //    Gizmos.color = Color.green;
+    //    Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
+    //    Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
+    //    Vector3 p2 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
+    //    Vector3 p3 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
 
-        Gizmos.DrawLine(p0, p1);
-        Gizmos.DrawLine(p1, p2);
-        Gizmos.DrawLine(p1, p3);
-        Gizmos.DrawLine(p0, p2);
-    }
+    //    Gizmos.DrawLine(p0, p1);
+    //    Gizmos.DrawLine(p1, p2);
+    //    Gizmos.DrawLine(p1, p3);
+    //    Gizmos.DrawLine(p0, p2);
+    //}
 #endif
 }
