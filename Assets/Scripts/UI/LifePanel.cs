@@ -9,8 +9,11 @@ public class LifePanel : MonoBehaviour
 
     Image[] lifeImage;
 
+    Player player;
+
     private void Awake()
     {
+        player = GetComponent<Player>();
         lifeImage = new Image[transform.childCount];
         for(int i = 0; i < lifeImage.Length; i++)
         {
@@ -19,12 +22,7 @@ public class LifePanel : MonoBehaviour
         }
     }
 
-    private void OnInitialize()
-    {
-        Player player = GetComponent<Player>();
-    }
-
-    private void OnLifeChange(int life)
+    public void OnLifeChange(int life)
     {
         for(int i = 0;i < life; i++)
         {
@@ -32,7 +30,7 @@ public class LifePanel : MonoBehaviour
         }
         for(int i = life; i < lifeImage.Length; i++)
         {
-            lifeImage[i].color = disableColor;
+            lifeImage[i].gameObject.SetActive(false);
         }
     }
 }

@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,9 +24,19 @@ public class Player : MonoBehaviour
 
     float playerMove;
 
+    /// <summary>
+    /// 현재 라이프
+    /// </summary>
     public int life = 3;
 
-    public int PlayerLife
+    /// <summary>
+    /// 시작 라이프
+    /// </summary>
+    const int startLife = 3;
+
+    public Action<int> onLifeChange;
+
+    public int Life
     {
         get
         {
@@ -33,7 +44,13 @@ public class Player : MonoBehaviour
         }
         set
         {
-            life = value;
+            if (life != value)
+            {
+                life = value;
+
+                life = Mathf.Clamp(life, 0, startLife);
+                onLifeChange?.Invoke(life);
+            }
         }
     }
 

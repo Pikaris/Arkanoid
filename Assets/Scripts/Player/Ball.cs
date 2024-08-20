@@ -21,6 +21,7 @@ public class Ball : MonoBehaviour
     List<GameObject> collisionList = new List<GameObject>();
 
     Player player;
+    LifePanel lifepanel;
 
 
 
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         player = new Player();
+        lifepanel = new LifePanel();
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         positionReset = transform.position;
@@ -96,8 +98,9 @@ public class Ball : MonoBehaviour
 
         if(collision.gameObject.CompareTag("KillZone"))
         {
-            player.PlayerLife -= 1;
+            player.Life -= 1;
             BallReset();
+            lifepanel.OnLifeChange(player.life);
         }
 
         if (collision.gameObject.CompareTag("Border"))
