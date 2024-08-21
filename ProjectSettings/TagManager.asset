@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - Block
   - KillZone
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ball
   - Block
   - BackGround
-  - 
+  - Item
   - 
   - 
   - 
@@ -62,4 +63,7 @@ TagManager:
     locked: 0
   - name: Block
     uniqueID: 2923338789
+    locked: 0
+  - name: Item
+    uniqueID: 44886657
     locked: 0
