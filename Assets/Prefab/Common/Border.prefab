@@ -68,7 +68,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0.11, y: 0}
+  m_Offset: {x: 0.2, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -113,7 +113,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: -4.3, y: 0}
+  m_Offset: {x: -4.4, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -231,7 +231,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -247,38 +247,38 @@ CompositeCollider2D:
         Y: 46170000
   - m_Collider: {fileID: 7634236734433252664}
     m_ColliderPaths:
-    - - X: 18864000
+    - - X: 21222000
         Y: 76950000
-      - X: -13099999
+      - X: -10742000
         Y: 76950000
-      - X: -13099999
+      - X: -10742000
         Y: -76950000
-      - X: 18864000
+      - X: 21222000
         Y: -76950000
   - m_Collider: {fileID: 3537462564365205712}
     m_ColliderPaths:
-    - - X: -97857000
+    - - X: -100477000
         Y: 76950000
-      - X: -127463000
+      - X: -130083000
         Y: 76950000
-      - X: -127463000
+      - X: -130083000
         Y: -76950000
-      - X: -97857000
+      - X: -100477000
         Y: -76950000
   m_CompositePaths:
     m_Paths:
-    - - {x: -9.785729, y: -7.695}
-      - {x: -9.78567, y: 4.617}
-      - {x: -1.31, y: 4.6169705}
-      - {x: -1.3099706, y: -7.695}
-      - {x: 1.8864, y: -7.6949706}
-      - {x: 1.8863708, y: 7.695}
-      - {x: -1.31, y: 7.6949706}
-      - {x: -1.3100293, y: 6.4638004}
-      - {x: -9.7857, y: 6.4638295}
-      - {x: -9.785729, y: 7.695}
-      - {x: -12.7463, y: 7.6949706}
-      - {x: -12.74627, y: -7.695}
+    - - {x: -10.0477295, y: -7.695}
+      - {x: -10.04767, y: 4.617}
+      - {x: -1.0742, y: 4.6169705}
+      - {x: -1.0741707, y: -7.695}
+      - {x: 2.1222, y: -7.6949706}
+      - {x: 2.122171, y: 7.695}
+      - {x: -1.0742, y: 7.6949706}
+      - {x: -1.0742294, y: 6.4638004}
+      - {x: -10.0477, y: 6.4638295}
+      - {x: -10.0477295, y: 7.695}
+      - {x: -13.0083, y: 7.6949706}
+      - {x: -13.00827, y: -7.695}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
