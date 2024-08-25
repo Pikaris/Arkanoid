@@ -8,9 +8,9 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Item item = gameObject.AddComponent<Item>();
-        item.PopItem = true;
+        Item item = new Item();
         item.ItemTransform = transform;
+        item.PopItem = true;
         Destroy(gameObject);
     }
 }

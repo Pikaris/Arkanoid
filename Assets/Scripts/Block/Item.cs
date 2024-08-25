@@ -13,14 +13,22 @@ public class Item : MonoBehaviour
 
     Transform disruptionTransform;
 
-    bool popItem = false;
+    GameObject obj;
+
+    bool popItem;
 
     public bool PopItem
     {
-        get { return popItem; }
         set
         {
             popItem = value;
+
+            if (popItem)
+            {
+                Debug.Log("Pop");
+                obj = Instantiate(gameObj, disruptionTransform);
+                rigid = obj.GetComponent<Rigidbody2D>();
+            }
         }
     }
 
@@ -34,22 +42,12 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-        //disruptionTransform = GetComponent<Transform>();
-    }
 
-    private void Update()
-    {
-        if (popItem)
-        {
-            Debug.Log("Pop");
-            GameObject obj = Instantiate(gameObj, disruptionTransform);
-            rigid = obj.GetComponent<Rigidbody2D>();
-        }
     }
 
     private void FixedUpdate()
     {
-        if (popItem)
+        if (popItem)        
         {
             rigid.MovePosition(transform.position + Time.fixedDeltaTime * Vector3.down * dropSpeed);
         }
