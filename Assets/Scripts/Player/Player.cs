@@ -8,6 +8,10 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public Action<int> onLifeChange;
+
+    public float moveSpeed = 0.5f;
+
     BoxCollider2D playerCollider;
     Rigidbody2D rigid;
 
@@ -20,8 +24,6 @@ public class Player : MonoBehaviour
 
     Ball ball;
 
-    public float moveSpeed = 0.5f;
-
     float playerMove;
 
     /// <summary>
@@ -33,8 +35,6 @@ public class Player : MonoBehaviour
     /// 시작 라이프
     /// </summary>
     const int startLife = 3;
-
-    public Action<int> onLifeChange;
 
     public int Life
     {
@@ -112,37 +112,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    //public Vector3 GetPlayerPosition()
-    //{
-    //    return playerTransform.position;
-    //}
-    //public BoxCollider2D GetPlayerCollider()
-    //{
-    //    return playerCollider;
-    //}
-
-
-#if UNITY_EDITOR
-
-    //protected virtual void DrawGizmos()
-    //{
-    //    Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x) + (Vector3.up * playerCollider.size.y);
-    //    Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x) + (Vector3.up * -playerCollider.size.y);
-
-    //    Gizmos.DrawLine(p0, p1);
-    //}
-    //protected virtual void DrawGizmosPlayer()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Vector3 p0 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
-    //    Vector3 p1 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
-    //    Vector3 p2 = transform.position + (Vector3.left * -playerCollider.size.x * 0.5f) + (Vector3.up * playerCollider.size.y * 0.5f);
-    //    Vector3 p3 = transform.position + (Vector3.left * playerCollider.size.x * 0.5f) + (Vector3.up * -playerCollider.size.y * 0.5f);
-
-    //    Gizmos.DrawLine(p0, p1);
-    //    Gizmos.DrawLine(p1, p2);
-    //    Gizmos.DrawLine(p1, p3);
-    //    Gizmos.DrawLine(p0, p2);
-    //}
-#endif
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("MegaBall"))
+        {
+            ball.GetMegaBallFlag();
+        }
+        if(collision.gameObject.CompareTag("Disruption"))
+        {
+            ball.GetDisruptionFlag();
+        }
+    }
 }

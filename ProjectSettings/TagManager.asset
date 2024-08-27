@@ -9,6 +9,8 @@ TagManager:
   - Block
   - KillZone
   - Item
+  - Disruption
+  - MegaBall
   layers:
   - Default
   - TransparentFX

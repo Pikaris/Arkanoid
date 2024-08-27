@@ -1,45 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public GameObject obj;
+    Rigidbody2D rigid;
 
-    protected Rigidbody2D rigid;
+    public float dropSpeed = 2.0f;
 
-    Transform disruptionTransform;
-
-    protected bool popItem = false;
-
-    public bool PopItem
+    private void Awake()
     {
-        get { return popItem; }
-        set
-        {
-            popItem = value;
-        }
+        rigid = GetComponent<Rigidbody2D>();
     }
 
-    public Transform ItemTransform
+    private void FixedUpdate()
     {
-        get { return disruptionTransform; }
-        set
-        {
-            disruptionTransform = value;
-            //obj = Instantiate(obj, disruptionTransform);
-            //rigid = obj.GetComponent<Rigidbody2D>();
-        }
+        rigid.MovePosition(transform.position + Time.fixedDeltaTime * Vector3.down * dropSpeed);
     }
 
-    /// <summary>
-    /// 관통 아이템 생성
-    /// </summary>
-    /// <param name="targetTrans"></param>
-    public void PopDisruption(Transform targetTrans)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject o = Instantiate(obj, targetTrans);
-        rigid = o.GetComponent<Rigidbody2D>();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

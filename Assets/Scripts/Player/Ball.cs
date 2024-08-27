@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.TextCore.Text;
 
 public class Ball : MonoBehaviour
@@ -18,23 +20,29 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rigidBody2D;
 
-    List<GameObject> collisionList = new List<GameObject>();
+    //List<GameObject> collisionList = new List<GameObject>();
 
     Player player;
-    LifePanel lifepanel;
+    //LifePanel lifepanel;
 
+    MegaBall disruption;
 
+    Ball ball;
 
     float elapsedTime = 0.0f;
 
-    bool playerShoot = false;
+    bool playerShootFlag = false;
 
-    bool moving = false;
+    bool movingFlag = false;
+
+    bool megaBallFlag = false;
+    bool disruptionFlag = false;
+
+
 
     private void Awake()
     {
-        player = new Player();
-        lifepanel = new LifePanel();
+        //lifepanel = new LifePanel();
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         positionReset = transform.position;
@@ -45,13 +53,13 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         OnShoot();
-        if (moving)
+        if (movingFlag)
         {
             rigidBody2D.MovePosition(transform.position + Time.fixedDeltaTime * ballSpeed * direction);
 
             elapsedTime += Time.fixedDeltaTime;
         }
-        else
+        else if(disruptionFlag)
         {
             rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x,
                 playerPosition.y + playerCollider.size.y));
@@ -61,34 +69,62 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (disruptionFlag)
+        {
+            DisruptionBall();
+            disruptionFlag = false;
+        }
     }
 
+    /// <summary>
+    /// 플레이어 데이터를 가져오기 위한 함수
+    /// </summary>
+    /// <param name="collider">플레이어의 콜라이더</param>
+    /// <param name="position">플레이어의 위치</param>
     public void GetPlayerData(BoxCollider2D collider, Vector3 position)
     {
         playerCollider = collider;
         playerPosition = position;
     }
 
+    /// <summary>
+    /// 시작시에 플레이어가 볼을 발사했는지 확인하기 위한 함수
+    /// </summary>
+    /// <param name="shoot">볼을 발사시에 true</param>
     public void GetFireData(bool shoot)
     {
-        playerShoot = shoot;
+        playerShootFlag = shoot;
     }
 
     void OnShoot()
     {
-        if(playerShoot && !moving)
+        if(playerShootFlag && !movingFlag)
         {
             direction = Quaternion.Euler(0.0f, 0.0f, 30.0f) * Vector3.up;
-            moving = true;
-            playerShoot = false;
+            movingFlag = true;
+            playerShootFlag = false;
         }
     }
 
     private void BallReset()
     {
-        playerShoot = false;
-        moving = false;
+        playerShootFlag = false;
+        movingFlag = false;
         transform.position = positionReset;
+    }
+    public void GetMegaBallFlag()
+    {
+        megaBallFlag = true;
+    }
+    public void GetDisruptionFlag()
+    {
+        disruptionFlag = true;
+    }
+    public void DisruptionBall()
+    {
+        //ball = GetComponent<Ball>();
+        Factory.Instance.GetBall(transform.position, direction.x * 0.8f, direction.y * 0.8f);
+        Factory.Instance.GetBall(transform.position, direction.x * 1.2f, direction.y * 1.2f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -100,7 +136,7 @@ public class Ball : MonoBehaviour
         {
             player.Life -= 1;
             BallReset();
-            lifepanel.OnLifeChange(player.life);
+            //lifepanel.OnLifeChange(player.life);
         }
 
         if (collision.gameObject.CompareTag("Border"))
@@ -110,16 +146,20 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Block") && (elapsedTime > 0.001f))
         {
-            direction = Vector2.Reflect(direction, collision.contacts[0].normal);
-            elapsedTime = 0.0f;
-            ballSpeed += 0.1f;
+            Debug.Log(megaBallFlag);
+            if (!megaBallFlag)
+            {
+                direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+                elapsedTime = 0.0f;
+                ballSpeed += 0.1f;
+            }
         }
 
         //Debug.Log(collisionList.Count);
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            collisionList.Remove(collision.gameObject);
+            //collisionList.Remove(collision.gameObject);
             if (transform.position.x < (playerPosX - playerSizeX * 0.4f))
             {
                 Debug.Log("LeftLeftLeftLeft");
