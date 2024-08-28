@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2278063260845382993}
   - component: {fileID: 1564522403526512569}
   - component: {fileID: 5534237926081423567}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Disruption
   m_TagString: Disruption
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d41f07be6a80074eb8bcba8cbf8adb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropSpeed: 2
 --- !u!212 &4466677946272361940
 SpriteRenderer:
   m_ObjectHideFlags: 0

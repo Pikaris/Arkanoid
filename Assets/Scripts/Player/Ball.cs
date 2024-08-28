@@ -7,9 +7,13 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.TextCore.Text;
 
-public class Ball : MonoBehaviour
+public class Ball : BallManager
 {
     public float ballSpeed = 3.0f;
+
+    GameObject ball1;
+    GameObject ball2;
+    static GameObject tempBallStatus;
 
     BoxCollider2D playerCollider;
     Vector3 playerPosition;
@@ -33,7 +37,7 @@ public class Ball : MonoBehaviour
 
     bool playerShootFlag = false;
 
-    bool movingFlag = false;
+    static bool movingFlag = false;
 
     bool megaBallFlag = false;
     bool disruptionFlag = false;
@@ -46,8 +50,12 @@ public class Ball : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
 
         positionReset = transform.position;
+    }
 
-        direction = Vector3.zero;
+    private void Start()
+    {
+        ball1 = GetComponent<GameObject>();
+        ball2 = GetComponent<GameObject>();
     }
 
     private void FixedUpdate()
@@ -59,8 +67,9 @@ public class Ball : MonoBehaviour
 
             elapsedTime += Time.fixedDeltaTime;
         }
-        else if(disruptionFlag)
+        else// if(disruptionFlag)
         {
+            direction = Vector3.zero;
             rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x,
                 playerPosition.y + playerCollider.size.y));
             elapsedTime += Time.fixedDeltaTime;
@@ -69,11 +78,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (disruptionFlag)
-        {
-            DisruptionBall();
-            disruptionFlag = false;
-        }
     }
 
     /// <summary>
@@ -119,12 +123,13 @@ public class Ball : MonoBehaviour
     public void GetDisruptionFlag()
     {
         disruptionFlag = true;
+        DisruptionBall();
+        disruptionFlag = false;
     }
     public void DisruptionBall()
     {
-        //ball = GetComponent<Ball>();
-        Factory.Instance.GetBall(transform.position, direction.x * 0.8f, direction.y * 0.8f);
-        Factory.Instance.GetBall(transform.position, direction.x * 1.2f, direction.y * 1.2f);
+        Factory.Instance.CopyBall(gameObject, transform.position, direction.x * 0.8f, direction.y);
+        Factory.Instance.CopyBall(gameObject, transform.position, direction.x * 1.2f, direction.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

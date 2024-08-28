@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1551202788468959118}
   - component: {fileID: 3016361755446234445}
   - component: {fileID: 8746173627766661865}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MegaBall
   m_TagString: MegaBall
   m_Icon: {fileID: 0}
