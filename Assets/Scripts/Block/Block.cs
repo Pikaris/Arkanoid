@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 
 public class Block : BlockManager
 {
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(megaBall)

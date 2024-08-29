@@ -7,16 +7,14 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.TextCore.Text;
 
-public class Ball : BallManager
+public class Ball : BallBase
 {
     public float ballSpeed = 3.0f;
 
-    GameObject ball1;
-    GameObject ball2;
-    static GameObject tempBallStatus;
-
     BoxCollider2D playerCollider;
     Vector3 playerPosition;
+
+    static Vector3 tempDirection;
 
     Vector3 direction;
 
@@ -35,12 +33,22 @@ public class Ball : BallManager
 
     float elapsedTime = 0.0f;
 
+    float playerSizeX;
+    float playerPosX;
+
+    /// <summary>
+    /// 시작시 플레이어가 볼을 쐈는지 확인하는 플래그(true면 쐈다, false면 아직 안 쐈다)
+    /// </summary>
     bool playerShootFlag = false;
 
-    static bool movingFlag = false;
+    bool movingFlag = false;
 
+    /// <summary>
+    /// 볼이 메가볼 상태인지 확인하는 플래그(true면 메가볼 상태, false면 일반볼 상태)
+    /// </summary>
     bool megaBallFlag = false;
-    bool disruptionFlag = false;
+
+    static bool disruptionFlag = false;
 
 
 
@@ -48,14 +56,22 @@ public class Ball : BallManager
     {
         //lifepanel = new LifePanel();
         rigidBody2D = GetComponent<Rigidbody2D>();
-
         positionReset = transform.position;
+
+        if (disruptionFlag)
+        {
+            direction = new Vector3(tempDirection.x * 0.8f, tempDirection.y, tempDirection.z);
+            movingFlag = true;
+            //playerSizeX = player.Collider.size.x;
+            //playerPosX = player.Position.x;
+        }
     }
 
     private void Start()
     {
-        ball1 = GetComponent<GameObject>();
-        ball2 = GetComponent<GameObject>();
+        player = GetComponent<Player>();
+        playerCollider = player.SetPlayerCollider();
+        playerPosition = player.SetPlayerPosition();
     }
 
     private void FixedUpdate()
@@ -64,14 +80,13 @@ public class Ball : BallManager
         if (movingFlag)
         {
             rigidBody2D.MovePosition(transform.position + Time.fixedDeltaTime * ballSpeed * direction);
-
+            tempDirection = direction;
             elapsedTime += Time.fixedDeltaTime;
         }
         else// if(disruptionFlag)
         {
             direction = Vector3.zero;
-            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x,
-                playerPosition.y + playerCollider.size.y));
+            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x, playerPosition.y + playerPosition.y));
             elapsedTime += Time.fixedDeltaTime;
         }
     }
@@ -85,11 +100,11 @@ public class Ball : BallManager
     /// </summary>
     /// <param name="collider">플레이어의 콜라이더</param>
     /// <param name="position">플레이어의 위치</param>
-    public void GetPlayerData(BoxCollider2D collider, Vector3 position)
-    {
-        playerCollider = collider;
-        playerPosition = position;
-    }
+    //public void GetPlayerData(BoxCollider2D collider, Vector3 position)
+    //{
+    //    playerCollider = collider;
+    //    playerPosition = position;
+    //}
 
     /// <summary>
     /// 시작시에 플레이어가 볼을 발사했는지 확인하기 위한 함수
@@ -110,32 +125,28 @@ public class Ball : BallManager
         }
     }
 
+    /// <summary>
+    /// 볼의 상태를 리셋하는 함수
+    /// </summary>
     private void BallReset()
     {
         playerShootFlag = false;
         movingFlag = false;
         transform.position = positionReset;
     }
+
     public void GetMegaBallFlag()
     {
         megaBallFlag = true;
     }
-    public void GetDisruptionFlag()
+    public void Disruption()
     {
         disruptionFlag = true;
-        DisruptionBall();
-        disruptionFlag = false;
-    }
-    public void DisruptionBall()
-    {
-        Factory.Instance.CopyBall(gameObject, transform.position, direction.x * 0.8f, direction.y);
-        Factory.Instance.CopyBall(gameObject, transform.position, direction.x * 1.2f, direction.y);
+        Factory.Instance.GetBall(transform.position, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        float playerSizeX = playerCollider.size.x;
-        float playerPosX = playerPosition.x;
 
         if(collision.gameObject.CompareTag("KillZone"))
         {
@@ -164,6 +175,8 @@ public class Ball : BallManager
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            playerSizeX = playerCollider.size.x;
+            playerPosX = playerPosition.x;
             //collisionList.Remove(collision.gameObject);
             if (transform.position.x < (playerPosX - playerSizeX * 0.4f))
             {

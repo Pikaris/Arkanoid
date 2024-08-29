@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         ball = FindFirstObjectByType<Ball>();
-        ball.GetPlayerData(playerCollider, transform.position);
+        //ball.GetPlayerData(playerCollider, transform.position);
     }
 
 
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        ball.GetPlayerData(playerCollider, transform.position);
+        //ball.GetPlayerData(playerCollider, transform.position);
     }
 
     public void OnMousePosition(InputAction.CallbackContext context)
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         mousePosition = context.ReadValue<Vector2>();
     }
 
-    void OnFire(InputAction.CallbackContext context)
+    private void OnFire(InputAction.CallbackContext context)
     {
         shoot = true;
         if(shoot)
@@ -112,6 +112,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public BoxCollider2D SetPlayerCollider()
+    {
+        return playerCollider;
+    }
+
+    public Vector3 SetPlayerPosition()
+    {
+        return transform.position;
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("MegaBall"))
@@ -120,7 +131,7 @@ public class Player : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Disruption"))
         {
-            ball.GetDisruptionFlag();
+            ball.Disruption();
         }
     }
 }
