@@ -9,27 +9,35 @@ public class LifePanel : MonoBehaviour
 
     Image[] lifeImage;
 
-    Player player;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
         lifeImage = new Image[transform.childCount];
-        for(int i = 0; i < lifeImage.Length; i++)
+
+        for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
             lifeImage[i] = child.GetComponent<Image>();
         }
+
+        Player player = FindAnyObjectByType<Player>();
+        player.onLifeChange += OnLifeChange;
+        //for (int i = 0; i < lifeImage.Length; i++)
+        //{
+        //    lifeImage[i].gameObject.SetActive(false);
+        //}
     }
 
-    public void OnLifeChange(int life)
+    private void OnLifeChange(int life)
     {
-        for(int i = 0;i < life; i++)
-        {
-            lifeImage[i].color = Color.white;
-        }
+        Debug.Log("OnLifeChange");
+        //for(int i = 0;i < life; i++)
+        //{
+        //    lifeImage[i].color = Color.white;
+        //}
         for(int i = life; i < lifeImage.Length; i++)
         {
+            //lifeImage[i].color = Color.yellow;
             lifeImage[i].gameObject.SetActive(false);
         }
     }

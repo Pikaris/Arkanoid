@@ -7,6 +7,7 @@ public class Factory : Singleton<Factory>
     public GameObject ball;
     public GameObject itemMegaBall;
     public GameObject itemDisruption;
+    public GameObject itemSlow;
 
     public GameObject GetBall(Vector3? position = null, float angle = 0.0f)
     {
@@ -19,5 +20,9 @@ public class Factory : Singleton<Factory>
     public GameObject GetDisruption(Vector3? position = null, float angle = 0.0f)
     {
         return Instantiate(itemDisruption, position.GetValueOrDefault(), Quaternion.Euler(0, 0, angle));
+    }
+    public GameObject GetSlow(Vector3? position = null, float angle = 0.0f)
+    {
+        return Instantiate(itemSlow, position.GetValueOrDefault(), Quaternion.Euler(0, 0, angle));
     }
 }

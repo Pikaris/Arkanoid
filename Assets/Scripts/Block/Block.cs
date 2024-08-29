@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,14 +7,18 @@ public class Block : BlockManager
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(megaBall)
+        if (megaBall)
         {
             Factory.Instance.GetMegaBall(transform.position, 0);
         }
-        if(disruption)
+        else if (disruption)
         {
             Factory.Instance.GetDisruption(transform.position, 0);
         }
-        Destroy(gameObject);                // ¿Ã ∫Ì∑∞¿ª ∆ƒ±´
+        else if (slow)
+        {
+            Factory.Instance.GetSlow(transform.position, 0);
+        }
+        Destroy(gameObject);                // Î∏îÎ°ùÏùÑ ÌååÍ¥¥
     }
 }

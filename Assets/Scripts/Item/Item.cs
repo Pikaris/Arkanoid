@@ -26,5 +26,9 @@ public class Item : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag("KillZone"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,7 +1,8 @@
-using JetBrains.Annotations;
+Ôªøusing JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -22,19 +23,26 @@ public class Player : MonoBehaviour
 
     PlayerInputAction InputAction;
 
-    Ball ball;
+    GameObject obj;
+
+    BallBase ballBase;
+
+    Ball[] balls_P;
 
     float playerMove;
+    bool shoot = false;
 
     /// <summary>
-    /// «ˆ¿Á ∂Û¿Ã«¡
+    /// ÌòÑÏû¨ ÎùºÏù¥ÌîÑ
     /// </summary>
-    public int life = 3;
+    public int life = 0;
 
     /// <summary>
-    /// Ω√¿€ ∂Û¿Ã«¡
+    /// ÏãúÏûë ÎùºÏù¥ÌîÑ
     /// </summary>
     const int startLife = 3;
+
+    static public int ballIndex = 0;
 
     public int Life
     {
@@ -54,11 +62,22 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    bool shoot = false;
+    public int BallIndex
+    {
+        get => ballIndex;
+        set
+        {
+            if (ballIndex != value)
+            {
+                ballIndex = value;
+            }
+        }
+    }
 
     private void Awake()
     {
+        ballBase = FindFirstObjectByType<BallBase>();
+        balls_P = new Ball[ballBase.transform.childCount];
         InputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
@@ -66,8 +85,18 @@ public class Player : MonoBehaviour
         direction = Vector3.zero;
         worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        ball = FindFirstObjectByType<Ball>();
+        for(int i = 0; i < balls_P.Length; i++)
+        {
+            Transform child = ballBase.transform.GetChild(i);
+            balls_P[i] = child.GetComponent<Ball>();
+        }
+        balls_P[ballIndex].gameObject.SetActive(true);
         //ball.GetPlayerData(playerCollider, transform.position);
+    }
+
+    private void Start()
+    {
+        Life = startLife;
     }
 
 
@@ -107,7 +136,7 @@ public class Player : MonoBehaviour
         shoot = true;
         if(shoot)
         {
-            ball.GetFireData(shoot);
+            balls_P[ballIndex].GetFireData = shoot;
             shoot = false;
         }
     }
@@ -123,15 +152,20 @@ public class Player : MonoBehaviour
     }
 
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("MegaBall"))
         {
-            ball.GetMegaBallFlag();
+            balls_P[ballIndex].GetMegaBallFlag();
         }
         if(collision.gameObject.CompareTag("Disruption"))
         {
-            ball.Disruption();
+            balls_P[ballIndex].GetDisruption();
+        }
+        if(collision.gameObject.CompareTag("Slow"))
+        {
+            balls_P[ballIndex].GetSlow();
         }
     }
 }

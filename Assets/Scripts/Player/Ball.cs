@@ -1,77 +1,67 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 public class Ball : BallBase
 {
     public float ballSpeed = 3.0f;
 
-    BoxCollider2D playerCollider;
-    Vector3 playerPosition;
+    Rigidbody2D rigidBody2D;
+    GameObject obj;
+    
+    LifePanel lifePanel;
+    Animator animator;
 
-    static Vector3 tempDirection;
+    //List<GameObject> collisionList = new List<GameObject>();
 
     Vector3 direction;
 
     Vector3 positionReset;
 
-    Rigidbody2D rigidBody2D;
-
-    //List<GameObject> collisionList = new List<GameObject>();
-
-    Player player;
-    //LifePanel lifepanel;
-
-    MegaBall disruption;
-
-    Ball ball;
+    static Vector3 tempDirection;
 
     float elapsedTime = 0.0f;
 
-    float playerSizeX;
-    float playerPosX;
+    readonly int On_Hash = Animator.StringToHash("MegaBallOnOff");
 
-    /// <summary>
-    /// ½ÃÀÛ½Ã ÇÃ·¹ÀÌ¾î°¡ º¼À» ½ú´ÂÁö È®ÀÎÇÏ´Â ÇÃ·¡±×(true¸é ½ú´Ù, false¸é ¾ÆÁ÷ ¾È ½ú´Ù)
-    /// </summary>
-    bool playerShootFlag = false;
-
-    bool movingFlag = false;
-
-    /// <summary>
-    /// º¼ÀÌ ¸Ş°¡º¼ »óÅÂÀÎÁö È®ÀÎÇÏ´Â ÇÃ·¡±×(true¸é ¸Ş°¡º¼ »óÅÂ, false¸é ÀÏ¹İº¼ »óÅÂ)
-    /// </summary>
-    bool megaBallFlag = false;
-
-    static bool disruptionFlag = false;
-
-
+    public bool GetFireData
+    {
+        get
+        {
+            return playerShootFlag;
+        }
+        set
+        {
+            playerShootFlag = value;
+        }
+    }
 
     private void Awake()
     {
-        //lifepanel = new LifePanel();
+        animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         positionReset = transform.position;
 
         if (disruptionFlag)
         {
-            direction = new Vector3(tempDirection.x * 0.8f, tempDirection.y, tempDirection.z);
+            float randomDirection = Random.Range(0.0f, 2.0f);
+            direction = new Vector3(tempDirection.x * randomDirection, tempDirection.y, tempDirection.z).normalized;
             movingFlag = true;
-            //playerSizeX = player.Collider.size.x;
-            //playerPosX = player.Position.x;
+        }
+        if (megaBallFlag)
+        {
+            animator.SetBool(On_Hash, true);
         }
     }
 
-    private void Start()
+    protected override void Start()
     {
-        player = GetComponent<Player>();
-        playerCollider = player.SetPlayerCollider();
-        playerPosition = player.SetPlayerPosition();
+        base.Start();
     }
 
     private void FixedUpdate()
@@ -83,37 +73,49 @@ public class Ball : BallBase
             tempDirection = direction;
             elapsedTime += Time.fixedDeltaTime;
         }
-        else// if(disruptionFlag)
+        else
         {
             direction = Vector3.zero;
-            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x, playerPosition.y + playerPosition.y));
+            SetPlayerData();
+            rigidBody2D.MovePosition(new Vector2(playerPosition.x + Time.fixedDeltaTime * ballSpeed * direction.x, playerCollider.size.y + playerPosition.y));
             elapsedTime += Time.fixedDeltaTime;
         }
     }
 
     private void Update()
     {
+        if (megaBallFlag)
+        {
+            animator.SetBool(On_Hash, true);
+        }
+        else
+        {
+            animator.SetBool(On_Hash, false);
+        }
+        if(slowBallFlag)
+        {
+            ballSpeed = 3.0f;
+            slowBallFlag = false;
+        }
     }
 
-    /// <summary>
-    /// ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ¸¦ °¡Á®¿À±â À§ÇÑ ÇÔ¼ö
-    /// </summary>
-    /// <param name="collider">ÇÃ·¹ÀÌ¾îÀÇ Äİ¶óÀÌ´õ</param>
-    /// <param name="position">ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡</param>
+
     //public void GetPlayerData(BoxCollider2D collider, Vector3 position)
     //{
     //    playerCollider = collider;
     //    playerPosition = position;
     //}
 
+    
     /// <summary>
-    /// ½ÃÀÛ½Ã¿¡ ÇÃ·¹ÀÌ¾î°¡ º¼À» ¹ß»çÇß´ÂÁö È®ÀÎÇÏ±â À§ÇÑ ÇÔ¼ö
+    /// ë³¼ì„ ìˆëŠ”ì§€ ì–´ë–¤ì§€ ìƒíƒœë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ í•¨ìˆ˜
     /// </summary>
-    /// <param name="shoot">º¼À» ¹ß»ç½Ã¿¡ true</param>
-    public void GetFireData(bool shoot)
-    {
-        playerShootFlag = shoot;
-    }
+    /// <param name="shoot">trueë©´ ë°œì‚¬, falseë©´ ë°œì‚¬ ì•ˆí•¨</param>
+    //public void GetFireData(bool shoot)
+    //{
+    //    playerShootFlag = shoot;
+    //}
+
 
     void OnShoot()
     {
@@ -126,33 +128,45 @@ public class Ball : BallBase
     }
 
     /// <summary>
-    /// º¼ÀÇ »óÅÂ¸¦ ¸®¼ÂÇÏ´Â ÇÔ¼ö
+    /// ë³¼ì˜ ìƒíƒœë¥¼ ë¦¬ì…‹í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
-    private void BallReset()
+    public void BallReset()
     {
+        gameObject.SetActive(true);
         playerShootFlag = false;
         movingFlag = false;
-        transform.position = positionReset;
+        slowBallFlag = false;
+        megaBallFlag = false;
+        disruptionFlag = false;
+
+        playerCollider = player.SetPlayerCollider();
+        playerPosition = player.SetPlayerPosition(); 
+        //transform.position = positionReset;
     }
 
     public void GetMegaBallFlag()
     {
+        megaBallElapsedTime = 0;
         megaBallFlag = true;
+        animator.SetBool(On_Hash, true);
     }
-    public void Disruption()
+    public void GetSlow()
     {
-        disruptionFlag = true;
-        Factory.Instance.GetBall(transform.position, 0);
+        slowBallFlag = true;
     }
+
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        SetPlayerData();
 
-        if(collision.gameObject.CompareTag("KillZone"))
+        if (collision.gameObject.CompareTag("KillZone"))
         {
-            player.Life -= 1;
-            BallReset();
-            //lifepanel.OnLifeChange(player.life);
+            gameObject.SetActive(false);
+            DecreaseLife();
+            //lifePanel.OnLifeChange(player.Life);
         }
 
         if (collision.gameObject.CompareTag("Border"))
@@ -162,7 +176,6 @@ public class Ball : BallBase
 
         if (collision.gameObject.CompareTag("Block") && (elapsedTime > 0.001f))
         {
-            Debug.Log(megaBallFlag);
             if (!megaBallFlag)
             {
                 direction = Vector2.Reflect(direction, collision.contacts[0].normal);
@@ -171,53 +184,51 @@ public class Ball : BallBase
             }
         }
 
-        //Debug.Log(collisionList.Count);
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerSizeX = playerCollider.size.x;
-            playerPosX = playerPosition.x;
-            //collisionList.Remove(collision.gameObject);
-            if (transform.position.x < (playerPosX - playerSizeX * 0.4f))
+
+            if (transform.position.x < (playerPosition.x - playerCollider.size.x * 0.4f))
             {
                 Debug.Log("LeftLeftLeftLeft");
                 direction = Quaternion.Euler(0.0f, 0.0f, 70.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX - playerSizeX * 0.25f))
+            else if (transform.position.x < (playerPosition.x - playerCollider.size.x * 0.25f))
             {
                 Debug.Log("LeftLeftLeft");
                 direction = Quaternion.Euler(0.0f, 0.0f, 50.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX - playerSizeX * 0.1f))
+            else if (transform.position.x < (playerPosition.x - playerCollider.size.x * 0.1f))
             {
                 Debug.Log("LeftLeft");
                 direction = Quaternion.Euler(0.0f, 0.0f, 30.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX))
+            else if (transform.position.x < (playerPosition.x))
             {
                 Debug.Log("Left");
                 direction = Quaternion.Euler(0.0f, 0.0f, 20.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX + playerSizeX * 0.1f))
+            else if (transform.position.x < (playerPosition.x + playerCollider.size.x * 0.1f))
             {
                 Debug.Log("Right");
                 direction = Quaternion.Euler(0.0f, 0.0f, -20.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX + playerSizeX * 0.2f))
+            else if (transform.position.x < (playerPosition.x + playerCollider.size.x * 0.2f))
             {
                 Debug.Log("RightRight");
                 direction = Quaternion.Euler(0.0f, 0.0f, -30.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX + playerSizeX * 0.35f))
+            else if (transform.position.x < (playerPosition.x + playerCollider.size.x * 0.35f))
             {
                 Debug.Log("RightRightRight");
                 direction = Quaternion.Euler(0.0f, 0.0f, -50.0f) * Vector3.up;
             }
-            else if (transform.position.x < (playerPosX + playerSizeX * 0.5f))
+            else if (transform.position.x < (playerPosition.x + playerCollider.size.x * 0.5f))
             {
                 Debug.Log("RightRightRightRight");
                 direction = Quaternion.Euler(0.0f, 0.0f, -70.0f) * Vector3.up;
             }
         }
+
     }
 }

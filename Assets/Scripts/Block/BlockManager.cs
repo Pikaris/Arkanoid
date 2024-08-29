@@ -12,10 +12,8 @@ public class BlockManager : MonoBehaviour
         Slow
     }
 
-    public int RandomMin = 0;
-    public int RandomMax = 10;
-
-    public GameObject disruptionObj;
+    int RandomMin = 0;
+    int RandomMax = 15;
 
     Transform[] block;
 
@@ -36,7 +34,7 @@ public class BlockManager : MonoBehaviour
 
         int itemNum = Random.Range(RandomMin, RandomMax);
 
-        if (1 == (int)Item.MegaBall)
+        if (itemNum == (int)Item.MegaBall)
         {
             megaBall = true;
         }
