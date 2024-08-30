@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Block : BlockManager
+public class Block : BlockBase
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {

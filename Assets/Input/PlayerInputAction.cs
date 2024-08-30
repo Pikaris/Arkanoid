@@ -70,6 +70,34 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Click"",
+            ""id"": ""3700d299-7bfd-4038-86f4-15ef63cf48f8"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""c56c9f05-79c8-4afe-a81c-6d5b22f6b52c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5322eafe-f18c-493e-a79e-c66523f135de"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -84,6 +112,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        // Click
+        m_Click = asset.FindActionMap("Click", throwIfNotFound: true);
+        m_Click_Click = m_Click.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -195,6 +226,52 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Click
+    private readonly InputActionMap m_Click;
+    private List<IClickActions> m_ClickActionsCallbackInterfaces = new List<IClickActions>();
+    private readonly InputAction m_Click_Click;
+    public struct ClickActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public ClickActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_Click_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Click; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ClickActions set) { return set.Get(); }
+        public void AddCallbacks(IClickActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ClickActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ClickActionsCallbackInterfaces.Add(instance);
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+        }
+
+        private void UnregisterCallbacks(IClickActions instance)
+        {
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+        }
+
+        public void RemoveCallbacks(IClickActions instance)
+        {
+            if (m_Wrapper.m_ClickActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IClickActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ClickActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ClickActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ClickActions @Click => new ClickActions(this);
     private int m_MouseSchemeIndex = -1;
     public InputControlScheme MouseScheme
     {
@@ -208,5 +285,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface IClickActions
+    {
+        void OnClick(InputAction.CallbackContext context);
     }
 }

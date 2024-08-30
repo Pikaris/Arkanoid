@@ -168,7 +168,7 @@ TextureImporter:
         width: 15
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,6 +176,48 @@ TextureImporter:
       bones: []
       spriteID: ea832affe30015842b005d3804b6ef00
       internalID: 1215221362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Blocks & Backgrounds_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 185
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47337b2de0726a4fa64495863f4cf6d
+      internalID: 1335455783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Blocks & Backgrounds_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 185
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02890edc335be74daaa2fddf2c450ca
+      internalID: -1853199482
       vertices: []
       indices: 
       edges: []
@@ -191,6 +233,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Arcade - Arkanoid - Blocks & Backgrounds_0: 1335455783
+      Arcade - Arkanoid - Blocks & Backgrounds_1: -1853199482
       Block1: -767419412
       Block2: -1475411827
       Block_Orange: 1215221362

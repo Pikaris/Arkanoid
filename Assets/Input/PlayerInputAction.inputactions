@@ -48,6 +48,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Click",
+            "id": "3700d299-7bfd-4038-86f4-15ef63cf48f8",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "c56c9f05-79c8-4afe-a81c-6d5b22f6b52c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5322eafe-f18c-493e-a79e-c66523f135de",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

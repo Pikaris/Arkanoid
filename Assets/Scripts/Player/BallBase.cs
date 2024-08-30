@@ -55,6 +55,9 @@ public class BallBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 라이프를 깎을 때 처리하는 함수
+    /// </summary>
     public void DecreaseLife()
     {
         GameObject[] objs;
@@ -70,9 +73,12 @@ public class BallBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 분열 아이템을 먹었을 때 처리하는 함수
+    /// </summary>
     public void GetDisruption()
     {
-        if(player.BallIndex < 8)
+        if(player.BallIndex < 7)
         {
             player.BallIndex++;
             balls[player.BallIndex].transform.position = balls[player.BallIndex - 1].transform.position;

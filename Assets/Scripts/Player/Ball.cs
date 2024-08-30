@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
@@ -16,8 +17,6 @@ public class Ball : BallBase
     
     LifePanel lifePanel;
     Animator animator;
-
-    //List<GameObject> collisionList = new List<GameObject>();
 
     Vector3 direction;
 
@@ -100,24 +99,13 @@ public class Ball : BallBase
     }
 
 
-    //public void GetPlayerData(BoxCollider2D collider, Vector3 position)
-    //{
-    //    playerCollider = collider;
-    //    playerPosition = position;
-    //}
+
 
     
     /// <summary>
-    /// 볼을 쐈는지 어떤지 상태를 가져오기 위한 함수
+    /// 볼을 발사할 때 처리하는 함수
     /// </summary>
-    /// <param name="shoot">true면 발사, false면 발사 안함</param>
-    //public void GetFireData(bool shoot)
-    //{
-    //    playerShootFlag = shoot;
-    //}
-
-
-    void OnShoot()
+    private void OnShoot()
     {
         if(playerShootFlag && !movingFlag)
         {
@@ -139,17 +127,24 @@ public class Ball : BallBase
         megaBallFlag = false;
         disruptionFlag = false;
 
-        playerCollider = player.SetPlayerCollider();
-        playerPosition = player.SetPlayerPosition(); 
-        //transform.position = positionReset;
+        //playerCollider = player.SetPlayerCollider();
+        //playerPosition = player.SetPlayerPosition(); 
+        transform.position = positionReset;
     }
 
+    /// <summary>
+    /// 메가볼 아이템을 먹었을 때 처리하는 함수
+    /// </summary>
     public void GetMegaBallFlag()
     {
         megaBallElapsedTime = 0;
         megaBallFlag = true;
         animator.SetBool(On_Hash, true);
     }
+
+    /// <summary>
+    /// 슬로우 아이템을 먹었을 때 처리하는 함수
+    /// </summary>
     public void GetSlow()
     {
         slowBallFlag = true;
@@ -166,7 +161,6 @@ public class Ball : BallBase
         {
             gameObject.SetActive(false);
             DecreaseLife();
-            //lifePanel.OnLifeChange(player.Life);
         }
 
         if (collision.gameObject.CompareTag("Border"))
@@ -176,6 +170,16 @@ public class Ball : BallBase
 
         if (collision.gameObject.CompareTag("Block") && (elapsedTime > 0.001f))
         {
+            Block block = FindAnyObjectByType<Block>();
+            Scene scene = SceneManager.GetActiveScene();
+
+            int currentScene = scene.buildIndex;
+
+            int nextScene = currentScene + 1;
+            if (block == null)
+            {
+                SceneManager.LoadScene(nextScene);
+            }
             if (!megaBallFlag)
             {
                 direction = Vector2.Reflect(direction, collision.contacts[0].normal);

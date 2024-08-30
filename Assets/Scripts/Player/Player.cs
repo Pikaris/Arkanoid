@@ -1,11 +1,7 @@
-﻿using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,7 +17,7 @@ public class Player : MonoBehaviour
     Vector3 direction;
     Vector3 worldPosition;
 
-    PlayerInputAction InputAction;
+    PlayerInputAction inputAction;
 
     GameObject obj;
 
@@ -58,6 +54,10 @@ public class Player : MonoBehaviour
 
                 life = Mathf.Clamp(life, 0, startLife);
                 onLifeChange?.Invoke(life);
+                if(life == 0)
+                {
+                    SceneManager.LoadScene("GameOver");
+                }
             }
         }
     }
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     {
         ballBase = FindFirstObjectByType<BallBase>();
         balls_P = new Ball[ballBase.transform.childCount];
-        InputAction = new PlayerInputAction();
+        inputAction = new PlayerInputAction();
         playerCollider = GetComponent<BoxCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
 
@@ -102,18 +102,18 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        InputAction.Player.Enable();
-        InputAction.Player.Fire.performed += OnFire;
-        InputAction.Player.Fire.canceled += OnFire;
-        InputAction.Player.Move.performed += OnMousePosition;
+        inputAction.Player.Enable();
+        inputAction.Player.Fire.performed += OnFire;
+        inputAction.Player.Fire.canceled += OnFire;
+        inputAction.Player.Move.performed += OnMousePosition;
     }
 
     private void OnDisable()
     {
-        InputAction.Player.Move.performed -= OnMousePosition;
-        InputAction.Player.Fire.canceled -= OnFire;
-        InputAction.Player.Fire.performed -= OnFire;
-        InputAction.Player.Disable();
+        inputAction.Player.Move.performed -= OnMousePosition;
+        inputAction.Player.Fire.canceled -= OnFire;
+        inputAction.Player.Fire.performed -= OnFire;
+        inputAction.Player.Disable();
     }
     private void FixedUpdate()
     {

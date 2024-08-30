@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlockManager : MonoBehaviour
+public class BlockBase : MonoBehaviour
 {
     enum Item
     {
@@ -38,7 +38,7 @@ public class BlockManager : MonoBehaviour
         {
             megaBall = true;
         }
-        else if (1 == (int)Item.Disruption)
+        else if (itemNum == (int)Item.Disruption)
         {
             disruption = true;
         }

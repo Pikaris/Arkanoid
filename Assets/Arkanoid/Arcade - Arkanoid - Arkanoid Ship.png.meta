@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,7 +95,448 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 995
+        width: 193
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957b5314dee234640b422446536b379e
+      internalID: 433349165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 900
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6956f4a1a57ace4fa8d5bbd9367f2f3
+      internalID: 71426733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_2
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 900
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f4d28fb9cdf12439710e2a898d2b02
+      internalID: 1358934403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 800
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a060b14b00a0148a74854c13d28fcc
+      internalID: -901500465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_4
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 800
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf2e74c99eaeb64f94b798dd710bd2f
+      internalID: -325666143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 700
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf9f5942b14c4d4898c71efbacf3c5b
+      internalID: 640615529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 700
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96fc92e21173a414f83ac5a436f06cc8
+      internalID: 60276700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 600
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69080c8fe3caf864a8df35dbc54eb13f
+      internalID: 1978761470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_8
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 600
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a1dd141d0df7b4f9bf35bda764044f
+      internalID: -1400213419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 500
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5de6f518ef6863439b045e6cda05661
+      internalID: 1029410417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_10
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 500
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f9952652647a924fb30cdd42bb9286c
+      internalID: 720515717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_11
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 400
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d719a75109182948994cdc974197f28
+      internalID: 1140874927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_12
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 400
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48254499d61d4bb4cbaf28f36639d781
+      internalID: 1512293891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_13
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 300
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc04e46ca8a7ad499b9b3a10f9df73d
+      internalID: -1823567056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_14
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 300
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a120e8030b5dac418dd0e39c319498f
+      internalID: 258184407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 200
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e0ba78815652345830f03ddf5809c4
+      internalID: 914970131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_16
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 200
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2139d4697e3d3cb4390b9de0017ae5f3
+      internalID: 1774426722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 100
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f390febf15108f46a5c04b495f27a2f
+      internalID: -1168414826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_18
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 100
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae85ecbb5eef4845bef32fe9fdc6c1c
+      internalID: -1450593279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_19
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c04a551a9052348a63f98ed78572db
+      internalID: 9499656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade - Arkanoid - Arkanoid Ship_20
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 191
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d9bfce705bf50459c3ce050bf943b3
+      internalID: -1940182568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +547,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Arcade - Arkanoid - Arkanoid Ship_0: 433349165
+      Arcade - Arkanoid - Arkanoid Ship_1: 71426733
+      Arcade - Arkanoid - Arkanoid Ship_10: 720515717
+      Arcade - Arkanoid - Arkanoid Ship_11: 1140874927
+      Arcade - Arkanoid - Arkanoid Ship_12: 1512293891
+      Arcade - Arkanoid - Arkanoid Ship_13: -1823567056
+      Arcade - Arkanoid - Arkanoid Ship_14: 258184407
+      Arcade - Arkanoid - Arkanoid Ship_15: 914970131
+      Arcade - Arkanoid - Arkanoid Ship_16: 1774426722
+      Arcade - Arkanoid - Arkanoid Ship_17: -1168414826
+      Arcade - Arkanoid - Arkanoid Ship_18: -1450593279
+      Arcade - Arkanoid - Arkanoid Ship_19: 9499656
+      Arcade - Arkanoid - Arkanoid Ship_2: 1358934403
+      Arcade - Arkanoid - Arkanoid Ship_20: -1940182568
+      Arcade - Arkanoid - Arkanoid Ship_3: -901500465
+      Arcade - Arkanoid - Arkanoid Ship_4: -325666143
+      Arcade - Arkanoid - Arkanoid Ship_5: 640615529
+      Arcade - Arkanoid - Arkanoid Ship_6: 60276700
+      Arcade - Arkanoid - Arkanoid Ship_7: 1978761470
+      Arcade - Arkanoid - Arkanoid Ship_8: -1400213419
+      Arcade - Arkanoid - Arkanoid Ship_9: 1029410417
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
